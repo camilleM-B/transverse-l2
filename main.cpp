@@ -56,13 +56,6 @@ int main() {
 }*/
 
 
-
-
-
-
-
-
-
 int thresh = 50, N = 5;
 const char* wndname = "Square Detection Demo";
 
@@ -78,6 +71,7 @@ static double angle(Point pt1, Point pt2, Point pt0)
 	return (dx1*dx2 + dy1 * dy2) / sqrt((dx1*dx1 + dy1 * dy1)*(dx2*dx2 + dy2 * dy2) + 1e-10);
 }
 
+//listpoint(approx[j % 4], approx[j - 2], approx[j - 1], listx, listy, listx2, listy2);
 void listpoint(Point pt1, Point pt2, Point pt0 , vector<double> & listx,  vector<double> & listy, vector<double> & listx2, vector<double> & listy2)
 {
 	listx.push_back(pt1.x - pt0.x);
@@ -87,14 +81,408 @@ void listpoint(Point pt1, Point pt2, Point pt0 , vector<double> & listx,  vector
 	listx2.push_back(pt2.x - pt0.x);
 	listy2.push_back(pt2.y - pt0.y);
 
+
 }
 
+void reference(vector<Point>  list) {
+	unsigned int i;
+	int long_carte = 89;
+	vector<Point> note;
+	int x, y; //x=note y =longeur
+
+	int hauteur[8] = {3,112,200,289,350,434,506,584};//0do 1re 2mi 3fa 4sol 5la 6si 7doDO
+	for (i = 0; i < list.size();i++)
+	{
+		if (list[i].x > 100 && list[i].x < 100+ long_carte) // longeur 1
+		{
+			y = 1;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x,y));
+			}
+			if (list[i].y >hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y <  hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100+long_carte && list[i].x < 100 + long_carte*2) // longeur 2
+		{
+			y = 2;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100 + long_carte*2 && list[i].x < 100 + long_carte * 3) // longeur 3
+		{
+			y = 3;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100 + long_carte * 3 && list[i].x < 100 + long_carte * 4) // longeur 4
+		{
+			y = 4;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100 + long_carte * 4 && list[i].x < 100 + long_carte * 5) // longeur 3
+		{
+			y = 4;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100 + long_carte * 5 && list[i].x < 100 + long_carte * 6) // longeur 6
+		{
+			y = 5;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100 + long_carte * 6 && list[i].x < 100 + long_carte * 7) // longeur 7
+		{
+			y = 7
+;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+
+		if (list[i].x > 100 + long_carte * 7 && list[i].x < 100 + long_carte * 8) // longeur 8
+		{
+			y = 8;
+
+			if (list[i].y < hauteur[1]) { //do
+				x = 0;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[1] && list[i].y < hauteur[2]) { //ré
+				x = 1;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[2] && list[i].y < hauteur[3]) { //mi
+				x = 2;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[3] && list[i].y < hauteur[4]) { //fa
+				x = 3;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[4] && list[i].y < hauteur[5]) { //sol
+				x = 4;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[5] && list[i].y < hauteur[6]) { //la
+				x = 5;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[6] && list[i].y < hauteur[7]) { //si
+				x = 6;
+				note.push_back(Point(x, y));
+			}
+			if (list[i].y > hauteur[7]) { //doDO
+				x = 7;
+				note.push_back(Point(x, y));
+			}
+		}
+	}
+	
+	for (i = 0; i < note.size(); i++)
+	{
+		cout << note[i] << endl;
+	}
+}
+
+
+void clean(vector<Point>  listx) {
+
+	unsigned int i = listx.size() - 1, j = listx.size() - 1;
+	unsigned int o = 0;
+	
+	while (i > 0)
+	{
+		j = listx.size() - 1;
+		while(j>0)
+		{
+			if (i != j)
+			{
+				if (listx[j].x > listx[i].x && listx[j].x <= listx[i].x + 60)
+				{
+					if (listx[j].y > listx[i].y && listx[j].y <= listx[i].y + 60)
+					{
+						//cout << "i " << i << endl << "j " << j << endl << endl;
+						o++;
+						listx.erase(listx.begin() + j);
+					//	cout << "o11= " << o << endl;
+						i--;
+						j--;
+					}
+					if (listx[j].y < listx[i].y && listx[j].y >= listx[i].y - 60)
+					{
+						//cout << "i " << i << endl << "j " << j << endl << endl;
+						o++;
+						listx.erase(listx.begin() + j);
+						//cout << "o12= " << o << endl;
+						i--;
+						j--;
+					}/*cout << "i " << i <<" "<<listx[i].x << endl << "j " << j <<" " << listx[j].x << endl << endl;
+					o++;
+					listx.erase(listx.begin() + j );
+					cout <<"o1= "<< o << endl;
+					i--;
+					j--;*/
+				}
+				if (listx[j].x < listx[i].x && listx[j].x >= listx[i].x - 60)
+				{
+					if (listx[j].y > listx[i].y && listx[j].y <= listx[i].y + 60)
+					{
+						//cout << "i " << i << endl << "j " << j << endl << endl;
+						o++;
+						listx.erase(listx.begin() + j);
+						//cout << "o21= " << o << endl;
+						i--;
+						j--;
+					}
+					if (listx[j].y < listx[i].y && listx[j].y >= listx[i].y - 60)
+					{
+					//	cout << "i " << i << endl << "j " << j << endl << endl;
+						o++;
+						listx.erase(listx.begin() + j);
+						//cout << "o22= " << o << endl;
+						i--;
+						j--;
+					}
+				}
+			}
+			j--;
+		}
+		//cout << i << " " << listx[i].y << endl;
+
+		i--;
+	}
+
+	reference(listx);
+}
+//
 
 
 // returns sequence of squares detected on the image.
 // the sequence is stored in the specified memory storage
 static void findSquares(const Mat& image, vector<vector<Point> >& squares)
 {
+
 	squares.clear();
 
 	/*Mat pyr, timg, gray0(image.size(), CV_8U), gray;
@@ -163,11 +551,11 @@ static void findSquares(const Mat& image, vector<vector<Point> >& squares)
 				// area may be positive or negative - in accordance with the
 				// contour orientation
 				if (approx.size() == 4 &&
-					fabs(contourArea(Mat(approx))) > 1000 && isContourConvex(Mat(approx)))
+					fabs(contourArea(Mat(approx))) > 5000 && isContourConvex(Mat(approx)))
 				{
 					double maxCosine = 0;
 
-					for (int j = 2; j < 5; j++)
+					for (int j = 2; j < 5; j++) 
 					{
 						// find the maximum cosine of the angle between joint edges
 						double cosine = fabs(angle(approx[j % 4], approx[j - 2], approx[j - 1]));
@@ -176,11 +564,11 @@ static void findSquares(const Mat& image, vector<vector<Point> >& squares)
 						listpoint(approx[j % 4], approx[j - 2], approx[j - 1], listx,listy,listx2,listy2);
 					}
 
-					for (int i = 0;i < listx.size();i++) {
+					/*for (int i = 0;i < listx.size();i++) {  //less rectangles to deal with
 						for (int j = 0;j < listx.size();j++) {
 							if (i != j) {
-								if ((j < i - 20) || (j > i + 20))  {
-									double jj = listx[j];
+								if ((listx[j] < listx[i] - 5) || (listx[j] > listx[i] + 5)) {
+									//double jj = listx[j];
 									listx.erase(listx.begin() + j);
 									listy.erase(listy.begin() + j);
 								}
@@ -196,7 +584,7 @@ static void findSquares(const Mat& image, vector<vector<Point> >& squares)
 											}
 										}
 									}
-								}*/ //affiche même nbr
+								} //affiche même nbr
 							}
 						}
 					}
@@ -204,8 +592,9 @@ static void findSquares(const Mat& image, vector<vector<Point> >& squares)
 					/*for (int i = 0;i < MAX(listx.size(),listy.size());i++) {
 						cout << "x==" << listx[i] << " y=" << listy[i] << endl;
 					}*/
+					
 
-
+					
 
 					// if cosines of all angles are small
 					// (all angles are ~90 degree) then write quandrange
@@ -218,34 +607,56 @@ static void findSquares(const Mat& image, vector<vector<Point> >& squares)
 			
 		}
 	}
-	cout << listx.size() << endl << listy.size();
+	//cout << listx.size() << endl << listy.size();
+	/*for (int i = 0;i < MAX(listx.size(), listy.size());i++) {
+		cout << "x==" << listx[i] << " y=" << listy[i] << endl;
+	}*/
+	//clean(listx, listy);
+
+
 }
+
+
 
 
 // the function draws all the squares in the image
 static void drawSquares(Mat& image, const vector<vector<Point> >& squares)
 {
-	
+	//vector<vector<Point> > squares;
+
+	vector<Point> list_point;
+
+
 	for (size_t i = 0; i < squares.size(); i++)
 	{
+		list_point.push_back(squares[i][0]);
+		//cout <<i << "bla " << squares[i][2] << endl;
+
 		const Point* p = &squares[i][0];
 
 		int n = (int)squares[i].size();
+		//cout << "idk= " << n << endl;
 		//dont detect the border
-		if (p->x > 3 && p->y > 3)
+		if (p->x > 3 && p->y > 3) {
 			polylines(image, &p, &n, 1, true, Scalar(0, 255, 0), 3, LINE_AA);
+		}
+
+		
+
 	}
 	imshow(wndname, image);
+	clean(list_point);
 
 }
 
 
 int main(int /*argc*/, char** /*argv*/)
 {
-	static const char* names[] = {"../images/tinytestplateau.jpg" ,0 };
+	static const char* names[] = {"../images/tinytestplateau2.jpg" ,0 };
 //	help();
 	namedWindow(wndname, 1);
 	vector<vector<Point> > squares;
+
 
 	for (int i = 0; names[i] != 0; i++)
 	{
@@ -255,8 +666,10 @@ int main(int /*argc*/, char** /*argv*/)
 			cout << "Couldn't load " << names[i] << endl;
 			continue;
 		}
-
+		
+		//sqr size =0
 		findSquares(image, squares);
+		//sqr size = 90
 		drawSquares(image, squares);
 		//imwrite( "out", image );
 		int c = waitKey();
